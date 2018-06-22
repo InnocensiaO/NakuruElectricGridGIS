@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Power Manager</title>
+
+    <link rel="stylesheet" href="{% static 'css/old/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/old/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/old/leaflet.css' %}">
+    <link rel="stylesheet" href="{% static 'css/old/MarkerCluster.css' %}">
+    <link rel="stylesheet" href="{% static 'css/old/MarkerCluster.Default.css' %}">
+    <link href="{% static 'css/old/leaflet.awesome-markers.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/old/L.Control.Locate.css' %}">
+    <link rel="stylesheet" href="{% static 'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css' %}">
+    <link href="{% static 'css/leaflet-measure.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/favicon-76.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/favicon-120.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/favicon-152.png' %}">
+    <link rel="icon" sizes="196x196" href="{% static 'img/favicon-196.png' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <script>
+      var met = "{% static 'img/meter.png' %}";
+      var sec = "{% static 'img/museum.png' %}";
+      var pri = "{% static 'img/primary.png' %}";
+      var lv = "{% static 'img/lv.png' %}";
+      var mv = "{% static 'img/mv.png' %}";
+      var local = "{% static 'img/turrets.png' %}";
+    </script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div class="navbar-icon-container">
+            <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a>
+            <a href="#" class="navbar-icon pull-right visible-xs" id="sidebar-toggle-btn"><i class="fa fa-search fa-lg white"></i></a>
+          </div>
+          <a class="navbar-brand" href="/"><span>Power</span>Manager</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group has-feedback">
+                <input id="searchbox" type="text" placeholder="Search" class="form-control">
+                <span id="searchicon" class="fa fa-search form-control-feedback"></span>
+            </div>
+          </form>
+          <ul class="nav navbar-nav">
+            
+            <li >
+              <a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Full Extent</a>
+              
+            </li>
+           
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <div id="container">
+      <div id="map"></div>
+    </div>
+    <div id="loading">
+      <div class="loading-indicator">
+        <div class="progress progress-striped active">
+          <div class="progress-bar progress-bar-info progress-bar-full"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-primary" id="feature-title"></h4>
+          </div>
+          <div class="modal-body" id="feature-info"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="attributionModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">
+              Developed by <a href='#'>Winnie</a>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <div id="attribution"></div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="{% static 'js/old/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'js/old/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/old/typeahead.bundle.min.js' %}"></script>
+    <script src="{% static 'js/old/handlebars.min.js' %}"></script>
+    <script src="{% static 'js/old/list.min.js' %}"></script>
+    <script src="{% static 'js/old/leaflet.js' %}"></script>
+     <script src="{% static 'js/leaflet-measure.min.js' %}"></script>
+    <script src="{% static 'js/old/leaflet.markercluster.js' %}"></script>
+    <script src="{% static 'js/old/L.Control.Locate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/old/leaflet.awesome-markers.js' %}"></script>
+    <script src="{% static 'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+  </body>
+</html>

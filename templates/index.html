@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+<title>Nakuru Electric Grid Web GIS - Dashboard</title>
+
+<link href="{% static 'dist/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'dist/datepicker3.css' %}" rel="stylesheet">
+<link href="{% static 'dist/styles.css' %}" rel="stylesheet">
+
+<!--Icons-->
+<script src="{% static 'dist/lumino.glyphs.js' %}"></script>
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/"><span>Nakuru</span>Electric Grid Web GIS</a>
+				<ul class="user-menu">
+					{% if user.is_authenticated %}
+					<li class="dropdown pull-right">						
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ user.username }} <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{% url 'loggedout' %}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+							{% else %}
+							<li><a href="{% url 'login' %}"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Login</a></li>
+							{% endif %}
+							
+						</ul>
+					</li>
+				</ul>
+			</div>
+							
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-6 col-lg-4 sidebar">
+		
+		<ul class="nav menu">
+
+		<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="about-btn"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;ABOUT SITE</a></li>
+         <p><b>This site was motivated by the need to improve accessibility to geospatial data related to the Electric Power System Grid in Kenya.</b></p>
+         <p><b>The site depicts the power generation points, transmission and distribution network infrastracture in Nakuru County.</b></p>
+			
+	    </ul>
+       <ul class="nav menu">
+
+		<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="about-btn"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;DISCLAIMER </a></li>
+         <p><b>The data displayed on this site is for academic and research purposes only. Accuracy or completeness of data cannot be guaranteed.</b></p>
+        			
+	    </ul>
+
+	    <ul class="nav menu">
+
+		  <img src="{% static 'img/p10.png' %}" alt="My Image" class="center-block">
+        			
+	    </ul>
+
+       
+
+<div class="attribution">Developed by <a href="">Innocensia Owuor</a></div>
+
+
+	</div><!--/.sidebar-->
+	
+	{% block content %}
+	{% endblock %}
+
+	<script src="{% static 'dist/jquery-1.11.1.min.js' %}"></script>
+	<script src="{% static 'dist/chart.min.js' %}"></script>
+	<script src="{% static 'dist/chart-data.js' %}"></script>
+	<script src="{% static 'dist/bootstrap.min.js' %}"></script>
+	<script src="{% static 'dist/bootstrap-datepicker.js' %}"></script>
+	<script src="{% static 'dist/bootstrap-table.js' %}"></script>
+	<script src="{% static 'dist/exporting.js' %}"></script>
+</body>
+
+</html>

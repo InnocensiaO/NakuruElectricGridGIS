@@ -1,0 +1,231 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'css/bootstrap-table.css' %}" rel="stylesheet">
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+				<li class="active">Icons</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="page-header">Dashboard</h2>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-blue panel-widget ">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">{{local.count}}</div>
+							<div class="text-muted">Sec Local</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-orange panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked trash"><use xlink:href="#stroked-trash"/></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">{{lvlines.count}}</div>
+							<div class="text-muted">Lv Lines</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-teal panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked dashboard dial"><use xlink:href="#stroked-dashboard-dial"/></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">{{poles.count}}</div>
+							<div class="text-muted">Poles</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-red panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked calendar blank"><use xlink:href="#stroked-calendar-blank"/></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">{{substations.count}}</div>
+							<div class="text-muted">Primary Station</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+		<hr>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Power Analysis</div>
+					<div class="panel-body">
+						<div class="col-md-12">
+                            <div id="powerchart"></div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Completed Installations</div>
+					<div class="panel-body">
+						<div class="col-md-12">
+                            <table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                            <thead>
+                            <tr>
+                                <th data-checkbox="true" >Customer ID</th>
+                                <th data-sortable="true">Customer Name</th>
+                                <th data-sortable="true">Customer National ID</th>
+                                <th data-sortable="true">Meter No</th>
+                                <th data-sortable="true">Installation Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for install in installed %}
+                            <tr>
+                              <td>{{install.customer_id}}</td>
+                              <td>{{install.customer_name}}</td>
+                              <td>{{install.customer_national_id}}</td>
+                              <td>{{install.meterbox_no}}</td>
+                              <td>{{install.installation_date}}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>                   
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+		<hr>
+		<div class="row">
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>New Orders</h4>
+						<div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Power Transmission</h4>
+						<div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Customer Connection</h4>
+						<div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div c
+					lass="panel-body easypiechart-panel">
+						<h4>Repair</h4>
+						<div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+								
+	</div>	<!--/.main-->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+
+	<script type="text/javascript">
+        $(function () {
+            $('#powerchart').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                yAxis: {
+                    min:0,
+                    title: {
+                        text: 'Load (KVA)'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: false,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [
+                    
+                        {
+                            data: [
+                            {% for sec in seclines %}
+
+                            ['{{ sec.identity24}}',{{ sec.estimate27 }}],
+                            {% endfor %}
+                            ]
+
+                        }
+                    
+                ]
+                // series: [{% for pole in seclines %}
+                // {
+                //     name: "{{ pole.subloca6}}",
+                //     data: [{{ pole.internal9  }}]
+
+                // },
+                // {% endfor %}
+                // ]
+            });
+        });
+    </script>
+
+{% endblock %}
