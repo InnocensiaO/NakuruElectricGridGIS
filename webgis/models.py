@@ -34,6 +34,7 @@ class Incidences(models.Model):
 
 class Generationplants(models.Model):
     name = models.CharField(max_length=254)
+    internalgp = models.FloatField(null=True)
     capacity = models.FloatField()
     geom = models.PointField(srid=4326, null=True)
 
@@ -60,8 +61,9 @@ class Counties(models.Model):
 
 class Elevenkvmvlines(models.Model):
     county = models.CharField(max_length=254)
-    internalel = models.FloatField()
+    internalpf = models.FloatField()
     controlcen = models.CharField(max_length=100)
+    internalps = models.FloatField(null=True)
     primarysub = models.CharField(max_length=100)
     primaryfee = models.CharField(max_length=100)
     feederleng = models.FloatField()
@@ -82,8 +84,10 @@ class Elevenkvmvlines(models.Model):
 
 class Primarysubstations(models.Model):
     county = models.CharField(max_length=254)
-    internalpr = models.FloatField()
+    internalps = models.FloatField()
     primarysub = models.CharField(max_length=254)
+    internaltl = models.FloatField(null=True)
+    transfeede = models.CharField(max_length=100, null=True)
     ownership = models.CharField(max_length=50)
     physicallo = models.CharField(max_length=100)
     incomingvo = models.CharField(max_length=50)
@@ -108,8 +112,9 @@ class Primarysubstations(models.Model):
 class Secondarysubstations(models.Model):
     name = models.CharField(max_length=30)
     substation = models.CharField(max_length=50)
+    internalpf = models.FloatField(null=True)
     primaryfee = models.CharField(max_length=100)
-    primaysubs = models.CharField(max_length=100)
+    primarysub = models.CharField(max_length=100)
     county = models.CharField(max_length=254)
     internalsb = models.FloatField()
     customerss = models.FloatField()
@@ -127,9 +132,10 @@ class Secondarysubstations(models.Model):
 
 class Thirtythreekvmvlines(models.Model):
     primaryfee = models.CharField(max_length=100)
+    internalps = models.FloatField(null=True)
     primarysub = models.CharField(max_length=100)
     county = models.CharField(max_length=254)
-    internaltt = models.FloatField()
+    internalpf = models.FloatField()
     typeofsect = models.CharField(max_length=100)
     feederleng = models.FloatField()
     numberofph = models.CharField(max_length=100)
@@ -150,6 +156,7 @@ class Transmissionlines(models.Model):
     transfeede = models.CharField(max_length=100)
     transsubta = models.CharField(max_length=100)
     internaltl = models.FloatField()
+    internaltb = models.FloatField(null=True)
     county = models.CharField(max_length=254)
     typeofsect = models.CharField(max_length=100)
     feederleng = models.CharField(max_length=50)
@@ -169,10 +176,11 @@ class Transmissionlines(models.Model):
 
 class Transmissionsubstations(models.Model):
     name = models.CharField(max_length=100)
-    incomingfe = models.CharField(max_length=10)
-    outgoingfe = models.CharField(max_length=100)
+    incomingvo = models.CharField(max_length=10)
+    outgoingvo = models.CharField(max_length=100)
     county = models.CharField(max_length=254)
     internaltb = models.FloatField()
+    internalgp = models.FloatField(null=True)
     ownership = models.CharField(max_length=50)
     physicallo = models.CharField(max_length=50)
     plotnumber = models.CharField(max_length=50)

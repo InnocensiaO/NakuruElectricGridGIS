@@ -8,7 +8,7 @@ from .models import *
 
 
 urlpatterns = [
-    # url(r'^$', views.DashboardView,name="home"),
+    #url(r'^$', views.DashboardView,name="home"),
 	url(r'^$', views.HomePageView, name ='map'),
 	url(r'^county_data/$', views.county_datasets, name = 'county'),
 	url(r'^elevenkvmvlines_data/$', views.elevenkvmvline_datasets, name = 'elevenkvmvlines'),

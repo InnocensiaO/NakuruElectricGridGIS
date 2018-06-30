@@ -22,7 +22,7 @@ from .models import Counties,Elevenkvmvlines, Generationplants,Primarysubstation
 
 def DashboardView(request):
 		return render(request, 'index.html', {})
-
+@login_required
 def HomePageView(request):
     return render(request, 'HomePageView.html', {})
 
